@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  var broker = $("#brokerAddress");
+  var broker = $("#brokerAddress").val();
   var payload = $("#payload");
   var topic = $("#topic");
   var topicSubscribe = $("#topicSubscribe");
@@ -12,13 +12,15 @@ $(document).ready(function () {
 
   $("#btnConnect").click(function () {
     // basic functionalities
-    client = mqtt.connect(broker.val());
-
+    client = mqtt.connect(broker);
+    $("#status").val("Connecting .....");
+    $("#status").removeClass("bg-danger").removeClass("bg-success");
     client.on("connect", function () {
       $("#status").val("Connected");
       $("#status").removeClass("bg-danger").addClass("bg-success");
 
     });
+    $(".btnSsecondary").attr("disabled", false);
 
   });
 
@@ -26,11 +28,15 @@ $(document).ready(function () {
     client.end();
     $("#status").val("Disconnected");
     $("#status").removeClass("bg-success").addClass("bg-danger");
+    $(".btnSsecondary").attr("disabled", true);
 
   });
 
   $("#btnPublish").click(function () {
-    arrPubTopics.push(topic.val());
+    if(topic.val() === ""){
+      alert("Please enter a topic");
+    }else{
+      arrPubTopics.push(topic.val());
     client.publish(topic.val(), payload.val());
     $("#publishTopics tbody").append("<tr class='table-success'> <td>" + topic.val() + "</td>" +
       "<td>" + payload.val() + "</td>" +
@@ -38,28 +44,32 @@ $(document).ready(function () {
       "</tr>"
     );
     check();
+    }
 
 
   });
 
   $("#btnSubscribe").click(function () {
-    client.subscribe(topicSubscribe.val());
-
-    client.on("message", function (topic, payload) {
-      console.log([topic, payload].join(": "));
-      $("#recievedTopics").append("<tr class='table-success'> <td>" + topic + "</td>" +
-      "<td>" + payload + "</td> <td>" + timestamp.toUTCString() + "</td>" +
-      "</tr>"
-    );
-    });
-
-    if (!arrSubTopics.includes(topicSubscribe.val())) {
+    if(topicSubscribe.val() === ""){
+      alert("Please enter a topic to subcribe")
+    }else{
+      client.subscribe(topicSubscribe.val());
+      client.on("message", function (topic, payload) {
+        console.log([topic, payload].join(": "));
+        $("#recievedTopics").append("<tr class='table-success'> <td>" + topic + "</td>" +
+        "<td>" + payload + "</td> <td>" + timestamp.toUTCString() + "</td>" +
+        "</tr>"
+      );
+      });
+  if (!arrSubTopics.includes(topicSubscribe.val())) {
       $("#subscribeTopics tbody").append("<tr  class='table-success'> <td>" + topicSubscribe.val() + "</td>" +
         "<td>" + timestamp.toUTCString() + "</td>" +
         "</tr>"
       );
       arrSubTopics.push(topicSubscribe.val());
     }
+    }
+    
 
   });
 

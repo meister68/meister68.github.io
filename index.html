@@ -19,39 +19,45 @@
 </head>
 
 <body>
-  <h1 class="header text-center ">MQTT</h1>
-
+  
+  
 </body>
 <script src="scripts/browserMqtt.js"></script>
 <script src="scripts/controller.js"></script>
 
 
 <div class="container">
+  <br>
+    <h1 class="header text-center shadow-lg p-2 mb-4 rounded">MQTT</h1><br>
+    <hr/>
   <div class="card-deck">
     <div class="card">
       <div class="card-header bg-primary text-center">Broker</div>
       <div class="card-body">
         Address:
-        <input type="text" placeholder="Broker Adress" class="form-control-sm col" id="brokerAddress"  value="wss://test.mosquito.org:8081/mqtt"><br>
+        <input type="text" placeholder="Broker Adress" class="form-control-sm col" id="brokerAddress" value="ws://broker.hivemq.com:8000/mqtt"><br>
         <br>
-        <button type="button" class="btn btn-primary" id="btnConnect">Connect</button>
-        <button type="button" class="btn btn-danger" id="btnDisconnect">Disconnect</button><br>
+        <button type="button" class="btn btn-primary col" id="btnConnect">Connect</button><br>
         <br>
-        <label id="statLabel"  >Status</label>
-        <input type="text" class="form-control-sm col border-0 text-center" id="status" readonly><br>
+        <button type="button" class="btn btn-danger col" id="btnDisconnect">Disconnect</button><br>
         <br>
-        <table class="table table-responsive table-bordered" id="recievedTopics">
-            <thead class="thead-light">
-              <tr>
-                <th class="col">Topic</th>
-                <th class="col">Payload</th>
-                <th class="col">Time</th>
-              </tr>
-            </thead>
-            <tbody>
-              
-            </tbody>
-          </table>
+        <input type="text" class="form-control-sm col border-0 text-center " id="status" value="Status" readonly><br>
+        <br>
+        
+      </div>
+      <div class="card-body">
+          <table class="table table-responsive table-bordered" id="recievedTopics">
+              <thead class="thead-light">
+                <tr>
+                  <th class="col">Topic</th>
+                  <th class="col">Payload</th>
+                  <th class="col">Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+              </tbody>
+            </table>
       </div>
     </div>
 
@@ -62,20 +68,25 @@
         <br>
         Payload: <input type="text" placeholder="Payload" class="form-control-sm col" id="payload"><br>
         <br>
-        <button type="button" class="btn btn-primary" id="btnPublish">Publish</button><br>
+        <button type="button" class="btn btn-primary col btnSsecondary" id="btnPublish">Publish</button><br>
         <br>
-        <table class="table table-responsive table-bordered" id="publishTopics">
-          <thead class="thead-light">
-            <tr>
-              <th class="col">Topic</th>
-              <th  class="col">Payload</th>
-              <th  class="col">Time</th>
-            </tr>
-          </thead>
-          <tbody>
-
-          </tbody>
-        </table>
+       
+      </div>
+      <br>
+      <br>
+      <div class="card-body">
+          <table class="table table-responsive table-bordered" id="publishTopics">
+              <thead class="thead-light">
+                <tr>
+                  <th class="col">Topic</th>
+                  <th  class="col">Payload</th>
+                  <th  class="col">Time</th>
+                </tr>
+              </thead>
+              <tbody>
+    
+              </tbody>
+            </table>
       </div>
     </div>
     <div class="card">
@@ -83,23 +94,29 @@
       <div class="card-body">
         Topic: <input type="text" placeholder="Topic" class="form-control-sm col" id="topicSubscribe"><br>
         <br>
-        <button type="button" class="btn btn-primary" id="btnSubscribe">Subscribe</button>
-        <button type="button" class="btn btn-danger" id="btnUnSubscribe">Unsubscribe</button>
+        <button type="button" class="btn btn-primary col btnSsecondary" id="btnSubscribe">Subscribe</button><br>
+        <br>
+        <button type="button" class="btn btn-danger col btnSsecondary" id="btnUnSubscribe">Unsubscribe</button>
         <br>
         <br>
-        <table class="table table-responsive table-bordered " id="subscribeTopics">
-          <thead class="thead-light">
-            <tr>
-              <th class="col">Topic</th>
-              <th class="col">Time</th>
-            </tr>
-          </thead>
-          <tbody>
-
-          </tbody>
-        </table>
+       
       </div>
-
+      <br>
+      <br>
+      <br>
+      <div class="card-body">
+                  <table class="table table-responsive table-bordered " id="subscribeTopics">
+                      <thead class="thead-light">
+                        <tr>
+                          <th class="col">Topic</th>
+                          <th class="col">Time</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+            
+                      </tbody>
+                    </table>
+              </div>
     </div>
 
   </div>

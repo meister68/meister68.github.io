@@ -12,3 +12,9 @@
     font-size: 20px;
     font-weight: bold;  
 }
+.btn,#status{
+    border-radius: 10px;
+}
+.header{
+    background-color: gray;
+}
