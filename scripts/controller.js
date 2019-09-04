@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  var broker = $("#brokerAddress").val();
+  var broker = $("#brokerAddress");
   var payload = $("#payload");
   var topic = $("#topic");
   var topicSubscribe = $("#topicSubscribe");
@@ -12,7 +12,7 @@ $(document).ready(function () {
 
   $("#btnConnect").click(function () {
     // basic functionalities
-    client = mqtt.connect(broker);
+    client = mqtt.connect(broker.val());
 
     client.on("connect", function () {
       $("#status").val("Connected");
